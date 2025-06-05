@@ -1,0 +1,53 @@
+import java.util.Scanner;
+import java.io.Console;
+
+public class LoginSystem {
+    private static final String CORRECT_USERNAME = "admin";
+    private static final String CORRECT_PASSWORD = "password123";
+    private static final int MAX_ATTEMPTS = 3;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Console console = System.console();
+        int attempts = 0;
+        boolean loggedIn = false;
+
+        System.out.println("=== Car Rental System Login ===");
+
+        while (attempts < MAX_ATTEMPTS && !loggedIn) {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+
+            System.out.print("Enter password: ");
+            // For password masking with *
+            char[] passwordChars = console.readPassword();
+            String password = new String(passwordChars);
+
+            // Check credentials
+            if (username.equals(CORRECT_USERNAME) {
+                if (password.equals(CORRECT_PASSWORD)) {
+                    System.out.println("\nLogin successful! Welcome to the Car Rental System.");
+                    loggedIn = true;
+                    // Proceed to main application
+                    CarRentalSystem.mainMenu();
+                } else {
+                    System.out.println("\nIncorrect password. Please try again.");
+                }
+            } else {
+                System.out.println("\nUsername not found. Please try again.");
+            }
+
+            attempts++;
+            if (!loggedIn && attempts < MAX_ATTEMPTS) {
+                System.out.println("Remaining attempts: " + (MAX_ATTEMPTS - attempts) + "\n");
+            }
+        }
+
+        if (!loggedIn) {
+            System.out.println("\nMaximum login attempts reached. System exiting.");
+            System.exit(0);
+        }
+
+        scanner.close();
+    }
+}
